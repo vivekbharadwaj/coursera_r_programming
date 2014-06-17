@@ -1,4 +1,3 @@
-setwd("C:/Users/Vivek Bharadwaj/Desktop/Analytics/R Files/Coursera/R programming course/Week 1 programming assignment")
 pollutantmean <- function(directory, pollutant, id = 1:332) {
         all_files <- dir(paste(getwd(),directory,sep="/"),full.names=TRUE)
         for (monitor in id) 
