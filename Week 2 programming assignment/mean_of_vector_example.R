@@ -1,25 +1,31 @@
 makeVector <- function(x = numeric()) {
-        m <- NULL
+        global_mean <- NULL
         set <- function(y) {
                 x <<- y
-                m <<- NULL
+                global_mean <<- NULL
         }
         get <- function() x
-        setmean <- function(mean) m <<- mean
-        getmean <- function() m
-        list(set = set, get = get,
-             setmean = setmean,
-             getmean = getmean)
+        setmean <- function(mean) global_mean <- mean
+        getmean <- function() global_mean
+        list(var1 = set, var2 = get,
+             var3 = setmean,
+             var4 = getmean)
 }
 
-cachemean <- function(x, ...) {
-        m <- x$getmean()
+cachemean <- function(something, ...) {
+        m <- something$var4()
         if(!is.null(m)) {
                 message("getting cached data")
                 return(m)
         }
-        data <- x$get()
+        data <- something$var2()
         m <- mean(data, ...)
-        x$setmean(m)
-        m
+        something$var3(m)
+        data
 }
+
+
+
+
+
+
