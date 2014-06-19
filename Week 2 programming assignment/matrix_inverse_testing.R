@@ -4,7 +4,7 @@ m<- makeCacheMatrix( )
 # initailize with a an easy to inspect matrix 
 m$set( matrix( c(0, 2, 2, 0 ), 2, 2))
 
-# note use of parens to retrive the matrix part of the object
+# note use of parens to retrieve the matrix part of the object
 m$get()
 #     [,1] [,2]
 #[1,]    0    2
