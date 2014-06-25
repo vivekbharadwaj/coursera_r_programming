@@ -17,10 +17,10 @@ best <- function(state,outcome) {
         final_list<-data.frame(state_split[state])
         switch(outcome,
                "heart failure"={
-                       ordered_df<-final_list[order(final_list[,17],final_list[,2],na.last=TRUE),]
+                       ordered_df<-final_list[order(final_list[,17],final_list[,2],na.last=NA),]
                },
                "heart attack"={
-                       ordered_df<-final_list[order(final_list[,11],final_list[,2],na.last=TRUE),]
+                       ordered_df<-final_list[order(final_list[,11],final_list[,2],na.last=NA),]
                },
                "pneumonia"={
                        ordered_df<-final_list[order(final_list[,23],final_list[,2],na.last=TRUE),]
