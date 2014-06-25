@@ -13,8 +13,11 @@ best <- function(state,outcome) {
         if(!(state %in% outcome_file$State))
                 stop("invalid state")
         
+        #creating unsorted df for the required state
         state_split<-split(outcome_file,outcome_file$State)
         final_list<-data.frame(state_split[state])
+        
+        #ordering based on outcome and hospital name(in case of tie)
         switch(outcome,
                "heart failure"={
                        ordered_df<-final_list[order(final_list[,17],final_list[,2],na.last=NA),]
@@ -23,8 +26,10 @@ best <- function(state,outcome) {
                        ordered_df<-final_list[order(final_list[,11],final_list[,2],na.last=NA),]
                },
                "pneumonia"={
-                       ordered_df<-final_list[order(final_list[,23],final_list[,2],na.last=TRUE),]
+                       ordered_df<-final_list[order(final_list[,23],final_list[,2],na.last=NA),]
                })
+        
+        #return value
         answer<-ordered_df[1,2]
         answer
 }
