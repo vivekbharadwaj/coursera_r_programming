@@ -1,0 +1,43 @@
+1.
+The main difference between sapply() and lapply() is that:
+
+The list created by sapply() has names corresponding to the thing you're looping over; and sapply() will attempt to "simplify" the result unless simplify=FALSE.  The list created by lapply() retains the names of the list you're looping over, but will not create names if they don't exist.
+
+Compare the results of the following to get a sense of how sapply() and lapply() are the same and different.  You can probably tell I'm a big fan of constructing minimally-different examples...
+
+letVec <- LETTERS[1:4]
+namedVec <- letVec
+names( namedVec ) <- sprintf( '%sName', LETTERS[1:4] )
+
+# A 4-element vector (simplified from a list) with elements named by the elements of the iterator
+aa <- sapply( letVec, function( L ) paste( rep( L, 5 ), collapse="." ) )  
+
+# A 4-element list with element names taken from the elements of the (nameless) iterator
+bb <- sapply( letVec, function( L ) paste( rep( L, 5 ), collapse="." ) , simplify=FALSE )   
+
+# A 4-element vector (simplified from a list) with elements named by the names of the iterator
+cc <- sapply( namedVec, function( L ) paste( rep( L, 5 ), collapse="." ) )  
+
+# A 4-element list with elements named by the names of the iterator
+dd <- sapply( namedVec, function( L ) paste( rep( L, 5 ), collapse="." ), simplify=FALSE )  
+
+# A 4-element LIST with unnamed elements because the iterator has no names
+ee <- lapply( letVec,  function( L ) paste( rep( L, 5 ), collapse="." ) ) 
+
+# A 4-element list with names taken from the names of the iterator
+ff <- lapply( namedVec, function( L ) paste( rep( L, 5 ), collapse="." ) ) 
+
+2.
+ na.string
+
+Using na.string allowed me to convert all my "Not Available" 's into NA's. I used this in the read.csv() function as such
+
+data<-read.csv("outcomes-of-care-measures.csv", na.strings="Not Available")
+
+It also converts all columns with numbers into a NUMERIC column!!!! ( how convenient)
+
+3.
+If you use split and have a list of dataframes, you can access the dataframes using indexing:
+list[[i]]
+is the ith dataframe in list, instead of:
+list$nameoftheithdataframe
